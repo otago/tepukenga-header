@@ -30,11 +30,13 @@ class Link extends DataExtension
 
     public function updateCMSFields(FieldList $fields)
     {
-        $links = GridField::create("Links", "Links", $this->owner->Links())
+        if ($this->owner->ID) {
+            $links = GridField::create("Links", "Links", $this->owner->Links())
             ->setConfig(
                 (new GridFieldConfig_RecordEditor())
                     ->addComponent(new GridFieldOrderableRows())
             );
-        $fields->addFieldToTab("Root.Links", $links);
+            $fields->addFieldToTab("Root.Links", $links);
+        }
     }
 }
