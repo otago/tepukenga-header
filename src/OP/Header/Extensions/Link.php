@@ -26,6 +26,14 @@ class Link extends DataExtension
         'Links' => ModelsLink::class
     ];
 
+    private static $owns = [
+        'Links'
+    ];
+
+    private static $cascade_deletes = [
+        'Links'
+    ];
+
     private static $default_sort = 'Sort ASC';
 
     public function updateCMSFields(FieldList $fields)

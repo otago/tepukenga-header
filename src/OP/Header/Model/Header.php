@@ -4,6 +4,8 @@ namespace OP\Header\Model;
 
 use SilverStripe\ORM\DataObject;
 use gorriecoe\Link\Models\Link;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 
 class Header extends DataObject
@@ -17,16 +19,38 @@ class Header extends DataObject
         'TopLinks' => Link::class . ".TopHeader"
     ];
 
+    private static $owns = [
+        'Links',
+        'TopLinks'
+    ];
+
+    private static $cascade_deletes = [
+        'Links',
+        'TopLinks'
+    ];
+
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
 
-        if ($links = $fields->fieldByName("Root.Links.Links")) {
-            $links->getConfig()->addComponent(new GridFieldOrderableRows());
+        $fields->removeByName("TopLinks");
+
+        if ($this->owner->ID) {
+            $links = GridField::create("Links", "Links", $this->owner->Links())
+            ->setConfig(
+                (new GridFieldConfig_RecordEditor())
+                    ->addComponent(new GridFieldOrderableRows())
+            );
+            $fields->addFieldToTab("Root.Links", $links);
         }
 
-        if ($top_links = $fields->fieldByName("Root.TopLinks.TopLinks")) {
-            $top_links->getConfig()->addComponent(new GridFieldOrderableRows());
+        if ($this->owner->ID) {
+            $links = GridField::create("TopLinks", "Links", $this->owner->TopLinks())
+            ->setConfig(
+                (new GridFieldConfig_RecordEditor())
+                    ->addComponent(new GridFieldOrderableRows())
+            );
+            $fields->addFieldToTab("Root.Top", $links);
         }
 
         return $fields;
