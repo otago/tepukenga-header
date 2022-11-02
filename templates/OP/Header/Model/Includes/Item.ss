@@ -1,10 +1,10 @@
-<% if $Children %>
+<% if $Links %>
     <button>$Title</button>
     <ul>
-        <% loop $Children %>
+        <% loop $Links %>
             <li class="$LinkingMode"><% include OP\Header\Model\Item %></li>
         <% end_loop %>
     </ul>
 <% else %>
-    <a href="$Link" title="$Title.XML">$Title</a>
+    <a href="$Link.Link" title="$Title">$Title</a>
 <% end_if %>
