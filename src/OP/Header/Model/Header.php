@@ -3,7 +3,7 @@
 namespace OP\Header\Model;
 
 use SilverStripe\ORM\DataObject;
-use SilverStripe\Versioned\Versioned;
+use gorriecoe\Link\Models\Link;
 
 class Header extends DataObject
 {
@@ -12,7 +12,7 @@ class Header extends DataObject
     ];
 
     private static $has_many = [
-        'Items' => Item::class . ".Header",
-        'TopItems' => Item::class . ".TopHeader"
+        'Items' => Link::class . ".Header",
+        'TopItems' => Link::class . ".TopHeader"
     ];
 }
