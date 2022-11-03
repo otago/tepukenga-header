@@ -1,5 +1,5 @@
 <% if $Links %>
-    <button>$Title</button>
+    <button class="op-header__toggle-subnav">$Title</button>
     <ul>
         <li class="$LinkingMode"><a class="$LinkingMode" href="$Link.Link" title="$Title">$Title</a></li>
         <% loop $Links %>
