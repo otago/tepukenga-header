@@ -4,19 +4,26 @@ export default () => {
   const toggleSearch = document.getElementById('toggleSearch');
   const toggleSubnavs = document.getElementsByClassName('op-header__toggle-subnav');
   const searchForm = document.getElementById('searchForm');
+  const updateBody = () => {
+    if (mainMenu.classList.contains('active') || searchForm.classList.contains('active')) {
+      document.body.classList.add('navgiationActive');
+    } else {
+      document.body.classList.remove('navgiationActive');
+    }
+  };
   if (toggleSearch) {
     toggleSearch.addEventListener('click', () => {
-      document.body.classList.toggle('navgiationActive');
       mainMenu.classList.remove('active');
       searchForm.classList.toggle('active');
+      updateBody();
     });
   }
   toggleNavigation.addEventListener('click', () => {
-    document.body.classList.toggle('navgiationActive');
     if (toggleSearch) {
       searchForm.classList.remove('active');
     }
     mainMenu.classList.toggle('active');
+    updateBody();
   });
   const toggleItemActive = (item, remove) => {
     if (remove) {

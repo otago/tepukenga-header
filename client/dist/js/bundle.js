@@ -112,17 +112,26 @@ exports.default = function () {
   var toggleSearch = document.getElementById('toggleSearch');
   var toggleSubnavs = document.getElementsByClassName('op-header__toggle-subnav');
   var searchForm = document.getElementById('searchForm');
+  var updateBody = function updateBody() {
+    if (mainMenu.classList.contains('active') || searchForm.classList.contains('active')) {
+      document.body.classList.add('navgiationActive');
+    } else {
+      document.body.classList.remove('navgiationActive');
+    }
+  };
   if (toggleSearch) {
     toggleSearch.addEventListener('click', function () {
-      document.body.classList.toggle('navgiationActive');
       mainMenu.classList.remove('active');
       searchForm.classList.toggle('active');
+      updateBody();
     });
   }
   toggleNavigation.addEventListener('click', function () {
-    document.body.classList.toggle('navgiationActive');
-    searchForm.classList.remove('active');
+    if (toggleSearch) {
+      searchForm.classList.remove('active');
+    }
     mainMenu.classList.toggle('active');
+    updateBody();
   });
   var toggleItemActive = function toggleItemActive(item, remove) {
     if (remove) {
