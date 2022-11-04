@@ -1,17 +1,21 @@
 <% if $Links %>
     <button class="op-header__toggle-subnav">
-        $Title
-        <% if $Subtitle %>
-            <span>$Subtitle</span>
-        <% end_if %>
+        <span>
+            $Title
+            <% if $Subtitle %>
+                <span>$Subtitle</span>
+            <% end_if %>
+        </span>
     </button>
     <ul>
         <li class="$LinkingMode">
             <a class="$LinkingMode" href="$Link.Link" title="$Title">
-                $Title
-                <% if $Subtitle %>
-                    <span>$Subtitle</span>
-                <% end_if %>
+                <span>
+                    $Title
+                    <% if $Subtitle %>
+                        <span>$Subtitle</span>
+                    <% end_if %>
+                </span>
             </a>
         </li>
         <% loop $Links %>
@@ -20,9 +24,11 @@
     </ul>
 <% else %>
     <a class="$LinkingMode" href="$Link.Link" title="$Title">
-        $Title
-        <% if $Subtitle %>
-            <span>$Subtitle</span>
-        <% end_if %>
+        <span>
+            $Title
+            <% if $Subtitle %>
+                <span>$Subtitle</span>
+            <% end_if %>
+        </span>
     </a>
 <% end_if %>
