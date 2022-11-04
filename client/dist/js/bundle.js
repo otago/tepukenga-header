@@ -111,8 +111,21 @@ exports.default = function () {
   var toggleNavigation = document.getElementById('toggleNavigation');
   var toggleSubnavs = document.getElementsByClassName('op-header__toggle-subnav');
   toggleNavigation.addEventListener('click', function () {
+    document.body.classList.toggle('mainMenuActive');
     mainMenu.classList.toggle('active');
   });
+  var toggleItemActive = function toggleItemActive(item, remove) {
+    if (remove) {
+      item.classList.toggle('active');
+    } else {
+      item.classList.remove('active');
+    }
+    if (item.classList.contains('active')) {
+      item.parentElement.classList.add('childActive');
+    } else {
+      item.parentElement.classList.remove('childActive');
+    }
+  };
 
   var _loop = function _loop(toggleSubnav) {
     toggleSubnav.addEventListener('click', function () {
@@ -127,7 +140,7 @@ exports.default = function () {
           var subnav = _step2.value;
 
           if (subnav !== parent) {
-            subnav.classList.remove('active');
+            toggleItemActive(subnav, false);
           }
         }
       } catch (err) {
@@ -145,7 +158,7 @@ exports.default = function () {
         }
       }
 
-      parent.classList.toggle('active');
+      toggleItemActive(parent, true);
     });
   };
 

@@ -3,8 +3,21 @@ export default () => {
   const toggleNavigation = document.getElementById('toggleNavigation');
   const toggleSubnavs = document.getElementsByClassName('op-header__toggle-subnav');
   toggleNavigation.addEventListener('click', () => {
+    document.body.classList.toggle('mainMenuActive');
     mainMenu.classList.toggle('active');
   });
+  const toggleItemActive = (item, remove) => {
+    if (remove) {
+      item.classList.toggle('active');
+    } else {
+      item.classList.remove('active');
+    }
+    if (item.classList.contains('active')) {
+      item.parentElement.classList.add('childActive');
+    } else {
+      item.parentElement.classList.remove('childActive');
+    }
+  };
   // eslint-disable-next-line
   for (const toggleSubnav of toggleSubnavs) {
     toggleSubnav.addEventListener('click', () => {
@@ -13,10 +26,10 @@ export default () => {
       // eslint-disable-next-line
       for (const subnav of parentList.children) {
         if (subnav !== parent) {
-          subnav.classList.remove('active');
+          toggleItemActive(subnav, false);
         }
       }
-      parent.classList.toggle('active');
+      toggleItemActive(parent, true);
     });
   }
 };
