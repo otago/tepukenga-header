@@ -1,9 +1,19 @@
 export default () => {
   const mainMenu = document.getElementById('mainMenu');
   const toggleNavigation = document.getElementById('toggleNavigation');
+  const toggleSearch = document.getElementById('toggleSearch');
   const toggleSubnavs = document.getElementsByClassName('op-header__toggle-subnav');
+  const searchForm = document.getElementById('searchForm');
+  if (toggleSearch) {
+    toggleSearch.addEventListener('click', () => {
+      document.body.classList.toggle('navgiationActive');
+      mainMenu.classList.remove('active');
+      searchForm.classList.toggle('active');
+    });
+  }
   toggleNavigation.addEventListener('click', () => {
-    document.body.classList.toggle('mainMenuActive');
+    document.body.classList.toggle('navgiationActive');
+    searchForm.classList.remove('active');
     mainMenu.classList.toggle('active');
   });
   const toggleItemActive = (item, remove) => {

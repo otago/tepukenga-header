@@ -109,9 +109,19 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = function () {
   var mainMenu = document.getElementById('mainMenu');
   var toggleNavigation = document.getElementById('toggleNavigation');
+  var toggleSearch = document.getElementById('toggleSearch');
   var toggleSubnavs = document.getElementsByClassName('op-header__toggle-subnav');
+  var searchForm = document.getElementById('searchForm');
+  if (toggleSearch) {
+    toggleSearch.addEventListener('click', function () {
+      document.body.classList.toggle('navgiationActive');
+      mainMenu.classList.remove('active');
+      searchForm.classList.toggle('active');
+    });
+  }
   toggleNavigation.addEventListener('click', function () {
-    document.body.classList.toggle('mainMenuActive');
+    document.body.classList.toggle('navgiationActive');
+    searchForm.classList.remove('active');
     mainMenu.classList.toggle('active');
   });
   var toggleItemActive = function toggleItemActive(item, remove) {
