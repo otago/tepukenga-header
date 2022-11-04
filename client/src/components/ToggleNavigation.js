@@ -13,7 +13,9 @@ export default () => {
   }
   toggleNavigation.addEventListener('click', () => {
     document.body.classList.toggle('navgiationActive');
-    searchForm.classList.remove('active');
+    if (toggleSearch) {
+      searchForm.classList.remove('active');
+    }
     mainMenu.classList.toggle('active');
   });
   const toggleItemActive = (item, remove) => {
