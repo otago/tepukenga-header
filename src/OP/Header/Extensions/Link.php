@@ -9,11 +9,13 @@ use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\ORM\DataExtension;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use gorriecoe\Link\Models\Link as ModelsLink;
+use SilverStripe\Forms\TextField;
 
 class Link extends DataExtension
 {
     private static $db = [
-        'Sort' => 'Int'
+        'Sort' => 'Int',
+        'Subtitle' => 'Varchar(255)',
     ];
 
     private static $has_one = [
@@ -34,10 +36,21 @@ class Link extends DataExtension
         'Links'
     ];
 
+    private static $summary_fields = [
+        'Title',
+        'Subtitle',
+    ];
+
     private static $default_sort = 'Sort ASC';
 
     public function updateCMSFields(FieldList $fields)
     {
+        $fields->addFieldToTab(
+            'Root.Main',
+            TextField::create('Subtitle'),
+            'Type'
+        );
+
         if ($this->owner->ID) {
             $links = GridField::create("Links", "Links", $this->owner->Links())
             ->setConfig(
