@@ -6,14 +6,15 @@ export default () => {
   const searchForm = document.getElementById('searchForm');
   const updateBody = () => {
     if (mainMenu.classList.contains('active') || searchForm.classList.contains('active')) {
-      document.body.classList.add('navgiationActive');
+      document.body.classList.add('navigationActive');
     } else {
-      document.body.classList.remove('navgiationActive');
+      document.body.classList.remove('navigationActive');
     }
   };
   if (toggleSearch) {
     toggleSearch.addEventListener('click', () => {
       mainMenu.classList.remove('active');
+      mainMenu.classList.toggle('searchActive');
       searchForm.classList.toggle('active');
       updateBody();
     });
@@ -21,6 +22,7 @@ export default () => {
   toggleNavigation.addEventListener('click', () => {
     if (toggleSearch) {
       searchForm.classList.remove('active');
+      mainMenu.classList.remove('searchActive');
     }
     mainMenu.classList.toggle('active');
     updateBody();

@@ -114,14 +114,15 @@ exports.default = function () {
   var searchForm = document.getElementById('searchForm');
   var updateBody = function updateBody() {
     if (mainMenu.classList.contains('active') || searchForm.classList.contains('active')) {
-      document.body.classList.add('navgiationActive');
+      document.body.classList.add('navigationActive');
     } else {
-      document.body.classList.remove('navgiationActive');
+      document.body.classList.remove('navigationActive');
     }
   };
   if (toggleSearch) {
     toggleSearch.addEventListener('click', function () {
       mainMenu.classList.remove('active');
+      mainMenu.classList.toggle('searchActive');
       searchForm.classList.toggle('active');
       updateBody();
     });
@@ -129,6 +130,7 @@ exports.default = function () {
   toggleNavigation.addEventListener('click', function () {
     if (toggleSearch) {
       searchForm.classList.remove('active');
+      mainMenu.classList.remove('searchActive');
     }
     mainMenu.classList.toggle('active');
     updateBody();
