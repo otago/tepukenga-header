@@ -37,7 +37,7 @@ class Link extends ModelsLink
     ];
 
     private static $has_many = [
-        'Links' => ModelsLink::class
+        'Links' => Link::class
     ];
 
     private static $owns = [

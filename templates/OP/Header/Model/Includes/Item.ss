@@ -17,11 +17,24 @@
             <li class="$LinkingMode" <% if $BottomMargin %>style="margin-bottom: $BottomMargin;"<% end_if %>><% include OP\Header\Model\Item Header=$Up.Header %></li>
         <% end_loop %>
         <% if $Content %>
-            <li class="content">
+            <li class="op-header__content">
                 $Image
                 <span>$Content</span>
-                $LinkTo
-                <span>$Header.Content</span>
+                <span>$LinkTo</span>
+                <% with $Header %>
+                    <span>$Content</span>
+                    <span class="op-header__social">
+                        <ul>
+                            <% loop $SocialMediaLinks %>
+                                <li>
+                                    <a{$IDAttr}{$ClassAttr} <% if $LinkURL %>href="{$LinkURL}"<% end_if %> {$TargetAttr}>
+                                        <img src="$SVG.URL" alt="$SVG.Title" />
+                                    </a>
+                                </li>
+                            <% end_loop %>
+                        </ul>
+                    </span>
+                <% end_with %>
             </li>
         <% end_if %>
     </ul>
