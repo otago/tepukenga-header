@@ -3,13 +3,14 @@
 namespace OP\Header\Model;
 
 use SilverStripe\ORM\DataObject;
-use gorriecoe\Link\Models\Link;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 
 class Header extends DataObject
 {
+    private static $table_name = 'OP_Header_Model_Header';
+
     private static $db = [
         'Title' => 'Varchar(255)'
     ];
