@@ -7,28 +7,33 @@
             <% end_if %>
         </span>
     </button>
-    <ul>
+    <ul class="<% if $Content %> has-content<% end_if %>">
         <li class="$LinkingMode">
             <a class="$LinkingMode" href="$Link.Link" title="$Title">
-                <span>
-                    $Title
-                    <% if $Subtitle %>
-                        <span>$Subtitle</span>
-                    <% end_if %>
-                </span>
+                <strong>$Title</strong>
             </a>
         </li>
         <% loop $Links %>
             <li class="$LinkingMode"><% include OP\Header\Model\Item %></li>
         <% end_loop %>
+        <% if $Content %>
+            <li class="content">
+                $Image
+                <span>$Content</span>
+            </li>
+        <% end_if %>
     </ul>
 <% else %>
     <a class="$LinkingMode" href="$Link.Link" title="$Title">
-        <span>
-            $Title
-            <% if $Subtitle %>
-                <span>$Subtitle</span>
-            <% end_if %>
-        </span>
+        <% if $Bold %>
+            <strong>$Title</strong>
+        <% else %>
+            <span>
+                $Title
+                <% if $Subtitle %>
+                    <span>$Subtitle</span>
+                <% end_if %>
+            </span>
+        <% end_if %>
     </a>
 <% end_if %>

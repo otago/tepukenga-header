@@ -11,22 +11,6 @@ export default () => {
       document.body.classList.remove('navigationActive');
     }
   };
-  if (toggleSearch) {
-    toggleSearch.addEventListener('click', () => {
-      mainMenu.classList.remove('active');
-      mainMenu.classList.toggle('searchActive');
-      searchForm.classList.toggle('active');
-      updateBody();
-    });
-  }
-  toggleNavigation.addEventListener('click', () => {
-    if (toggleSearch) {
-      searchForm.classList.remove('active');
-      mainMenu.classList.remove('searchActive');
-    }
-    mainMenu.classList.toggle('active');
-    updateBody();
-  });
   const toggleItemActive = (item, remove) => {
     if (remove) {
       item.classList.toggle('active');
@@ -39,6 +23,26 @@ export default () => {
       item.parentElement.classList.remove('childActive');
     }
   };
+  if (toggleSearch) {
+    toggleSearch.addEventListener('click', () => {
+      mainMenu.classList.remove('active');
+      mainMenu.classList.toggle('searchActive');
+      searchForm.classList.toggle('active');
+      // eslint-disable-next-line
+      for (const toggleSubnav of toggleSubnavs) {
+        toggleItemActive(toggleSubnav.parentElement, false);
+      }
+      updateBody();
+    });
+  }
+  toggleNavigation.addEventListener('click', () => {
+    if (toggleSearch) {
+      searchForm.classList.remove('active');
+      mainMenu.classList.remove('searchActive');
+    }
+    mainMenu.classList.toggle('active');
+    updateBody();
+  });
   // eslint-disable-next-line
   for (const toggleSubnav of toggleSubnavs) {
     toggleSubnav.addEventListener('click', () => {
@@ -51,6 +55,8 @@ export default () => {
         }
       }
       toggleItemActive(parent, true);
+      searchForm.classList.remove('active');
+      mainMenu.classList.remove('searchActive');
     });
   }
 };

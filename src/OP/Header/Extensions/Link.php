@@ -9,19 +9,26 @@ use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\ORM\DataExtension;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use gorriecoe\Link\Models\Link as ModelsLink;
+use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\Assets\Image;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\TextField;
 
 class Link extends DataExtension
 {
     private static $db = [
         'Sort' => 'Int',
+        'Bold' => 'Boolean',
         'Subtitle' => 'Varchar(255)',
+        'Content' => 'HTMLText'
     ];
 
     private static $has_one = [
         'Header' => Header::class,
         'TopHeader' => Header::class,
-        'Link' => ModelsLink::class
+        'Link' => ModelsLink::class,
+        'Image' => Image::class
     ];
 
     private static $has_many = [
@@ -29,7 +36,8 @@ class Link extends DataExtension
     ];
 
     private static $owns = [
-        'Links'
+        'Links',
+        'Image'
     ];
 
     private static $cascade_deletes = [
@@ -50,14 +58,27 @@ class Link extends DataExtension
             TextField::create('Subtitle'),
             'Type'
         );
-
-        if ($this->owner->ID) {
-            $links = GridField::create("Links", "Links", $this->owner->Links())
-            ->setConfig(
-                (new GridFieldConfig_RecordEditor())
-                    ->addComponent(new GridFieldOrderableRows())
+        if (!$this->owner->LinkID) {
+            $fields->addFieldsToTab(
+                "Root.Settings",
+                [
+                    UploadField::create('Image'),
+                    HTMLEditorField::create('Content')
+                ]
             );
-            $fields->addFieldToTab("Root.Links", $links);
+            if ($this->owner->ID) {
+                $links = GridField::create("Links", "Links", $this->owner->Links())
+                ->setConfig(
+                    (new GridFieldConfig_RecordEditor())
+                        ->addComponent(new GridFieldOrderableRows())
+                );
+                $fields->addFieldToTab("Root.Links", $links);
+            }
+        } else {
+            $fields->addFieldsToTab(
+                "Root.Settings",
+                CheckboxField::create('Bold')
+            );
         }
     }
 }
