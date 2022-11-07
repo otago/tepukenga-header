@@ -14,12 +14,14 @@
             </a>
         </li>
         <% loop $Links %>
-            <li class="$LinkingMode" <% if $BottomMargin %>style="margin-bottom: $BottomMargin;"<% end_if %>><% include OP\Header\Model\Item %></li>
+            <li class="$LinkingMode" <% if $BottomMargin %>style="margin-bottom: $BottomMargin;"<% end_if %>><% include OP\Header\Model\Item Header=$Up.Header %></li>
         <% end_loop %>
         <% if $Content %>
             <li class="content">
                 $Image
                 <span>$Content</span>
+                $LinkTo
+                <span>$Header.Content</span>
             </li>
         <% end_if %>
     </ul>

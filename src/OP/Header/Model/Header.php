@@ -12,12 +12,14 @@ class Header extends DataObject
     private static $table_name = 'OP_Header_Model_Header';
 
     private static $db = [
-        'Title' => 'Varchar(255)'
+        'Title' => 'Varchar(255)',
+        'Content' => 'HTMLText',
     ];
 
     private static $has_many = [
         'Links' => Link::class . ".Header",
-        'TopLinks' => Link::class . ".TopHeader"
+        'TopLinks' => Link::class . ".TopHeader",
+        'SocialMediaLinks' =>  Link::class . ".SocialMedia",
     ];
 
     private static $owns = [
@@ -51,7 +53,7 @@ class Header extends DataObject
                 (new GridFieldConfig_RecordEditor())
                     ->addComponent(new GridFieldOrderableRows())
             );
-            $fields->addFieldToTab("Root.Top", $links);
+            $fields->addFieldToTab("Root.Top links", $links);
         }
 
         return $fields;

@@ -9,6 +9,7 @@ use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use gorriecoe\Link\Models\Link as ModelsLink;
 use gorriecoe\LinkField\LinkField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\Assets\File;
 use SilverStripe\Assets\Image;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
@@ -29,8 +30,10 @@ class Link extends ModelsLink
     private static $has_one = [
         'Header' => Header::class,
         'TopHeader' => Header::class,
+        'SocialMedia' => Header::class,
         'LinkTo' => ModelsLink::class,
-        'Image' => Image::class
+        'Image' => Image::class,
+        'SVG' => File::class
     ];
 
     private static $has_many = [
@@ -39,7 +42,8 @@ class Link extends ModelsLink
 
     private static $owns = [
         'Links',
-        'Image'
+        'Image',
+        'SVG'
     ];
 
     private static $cascade_deletes = [
@@ -63,32 +67,41 @@ class Link extends ModelsLink
             TextField::create('Subtitle'),
             'Type'
         );
-        if (!$this->LinkID) {
+        if ($this->SocialMediaID) {
             $fields->addFieldsToTab(
                 "Root.Settings",
                 [
-                    UploadField::create('Image'),
-                    LinkField::create('LinkTo', 'Link', $this),
-                    HTMLEditorField::create('Content'),
+                    UploadField::create('SVG')
                 ]
             );
-            if ($this->ID) {
-                $links = GridField::create("Links", "Links", $this->Links())
-                ->setConfig(
-                    (new GridFieldConfig_RecordEditor())
-                        ->addComponent(new GridFieldOrderableRows())
-                );
-                $fields->addFieldToTab("Root.Links", $links);
-            }
         } else {
-            $fields->addFieldsToTab(
-                "Root.Settings",
-                [
-                    TextField::create('BottomMargin')
-                        ->setDescription("e.g. 25px"),
-                    CheckboxField::create('Bold')
-                ]
-            );
+            if (!$this->LinkID) {
+                $fields->addFieldsToTab(
+                    "Root.Settings",
+                    [
+                        UploadField::create('Image'),
+                        LinkField::create('LinkTo', 'Link', $this),
+                        HTMLEditorField::create('Content'),
+                    ]
+                );
+                if ($this->ID) {
+                    $links = GridField::create("Links", "Links", $this->Links())
+                    ->setConfig(
+                        (new GridFieldConfig_RecordEditor())
+                            ->addComponent(new GridFieldOrderableRows())
+                    );
+                    $fields->addFieldToTab("Root.Links", $links);
+                }
+            } else {
+                $fields->addFieldsToTab(
+                    "Root.Settings",
+                    [
+                        TextField::create('BottomMargin')
+                            ->setDescription("e.g. 25px"),
+                        CheckboxField::create('Bold')
+                    ]
+                );
+            }
         }
 
         return $fields;
