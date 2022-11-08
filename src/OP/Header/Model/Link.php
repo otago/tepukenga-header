@@ -14,6 +14,7 @@ use SilverStripe\Assets\Image;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\TextField;
+use SilverStripe\ORM\FieldType\DBField;
 
 class Link extends ModelsLink
 {
@@ -105,5 +106,10 @@ class Link extends ModelsLink
         }
 
         return $fields;
+    }
+
+    public function getSVGHTML()
+    {
+        return DBField::create_field('HTMLText', $this->SVG->getString());
     }
 }

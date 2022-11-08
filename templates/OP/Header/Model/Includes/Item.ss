@@ -28,7 +28,7 @@
                             <% loop $SocialMediaLinks %>
                                 <li>
                                     <a{$IDAttr}{$ClassAttr} <% if $LinkURL %>href="{$LinkURL}"<% end_if %> {$TargetAttr}>
-                                        <img src="$SVG.URL" alt="$SVG.Title" />
+                                        $SVGHTML
                                     </a>
                                 </li>
                             <% end_loop %>
