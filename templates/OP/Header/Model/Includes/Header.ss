@@ -14,7 +14,7 @@
         <% if $Links %>
             <div class="op-header__links" id="mainMenu">
                 <% if $SearchForm %><button id="toggleSearch" class="op-header__toggle op-header__toggle-search"><span>Search</span></button><% end_if %>
-                <button id="toggleNavigation" class="op-header__toggle op-header__toggle-navigation"><span>Toggle Navigation</span></button>
+                <button id="toggleNavigation" class="op-header__toggle op-header__toggle-navigation"><% include OP\Header\Model\MenuSVG %></button>
                 <ul>
                     <% loop $Links %>
                         <li class="$LinkingMode"><% include OP\Header\Model\Item Header=$Top %></li>
