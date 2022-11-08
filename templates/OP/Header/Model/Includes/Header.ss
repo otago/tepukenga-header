@@ -1,5 +1,5 @@
 <% require javascript("otago/tepukenga-header:client/dist/js/bundle.js") %>
-<nav class="op-header">
+<nav class="op-header $CSSClass">
     <% if $TopLinks %>
         <div class="op-header__top-links">
             <ul>

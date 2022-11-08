@@ -13,6 +13,7 @@ class Header extends DataObject
 
     private static $db = [
         'Title' => 'Varchar(255)',
+        'CSSClass' => 'Varchar(255)',
         'Content' => 'HTMLText',
     ];
 
