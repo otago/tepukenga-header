@@ -69,49 +69,46 @@ class Link extends ModelsLink
             TextField::create('Subtitle'),
             'Type'
         );
-        if ($this->SocialMediaID) {
+        if (!$this->LinkID) {
             $fields->addFieldsToTab(
                 "Root.Settings",
                 [
-                    UploadField::create('SVG')
+                    TextField::create('CSSClass'),
+                    UploadField::create('Image'),
+                    LinkField::create('LinkTo', 'Link', $this),
+                    HTMLEditorField::create('Content'),
                 ]
             );
-        } else {
-            if (!$this->LinkID) {
-                $fields->addFieldsToTab(
-                    "Root.Settings",
-                    [
-                        TextField::create('CSSClass'),
-                        UploadField::create('Image'),
-                        LinkField::create('LinkTo', 'Link', $this),
-                        HTMLEditorField::create('Content'),
-                    ]
+            if ($this->ID) {
+                $links = GridField::create("Links", "Links", $this->Links())
+                ->setConfig(
+                    (new GridFieldConfig_RecordEditor())
+                        ->addComponent(new GridFieldOrderableRows())
                 );
-                if ($this->ID) {
-                    $links = GridField::create("Links", "Links", $this->Links())
-                    ->setConfig(
-                        (new GridFieldConfig_RecordEditor())
-                            ->addComponent(new GridFieldOrderableRows())
-                    );
-                    $fields->addFieldToTab("Root.Links", $links);
-                }
-            } else {
-                $fields->addFieldsToTab(
-                    "Root.Settings",
-                    [
-                        TextField::create('BottomMargin')
-                            ->setDescription("e.g. 25px"),
-                        CheckboxField::create('Bold')
-                    ]
-                );
+                $fields->addFieldToTab("Root.Links", $links);
             }
+        } else {
+            $fields->addFieldsToTab(
+                "Root.Settings",
+                [
+                    TextField::create('BottomMargin')
+                        ->setDescription("e.g. 25px"),
+                    CheckboxField::create('Bold')
+                ]
+            );
         }
+        $fields->addFieldsToTab(
+            "Root.Settings",
+            [
+                UploadField::create('SVG')
+            ]
+        );
 
         return $fields;
     }
 
     public function getSVGHTML()
     {
-        return DBField::create_field('HTMLText', $this->SVG->getString());
+        return $this->SVG()->getString() ? DBField::create_field('HTMLText', $this->SVG->getString()) : null;
     }
 }

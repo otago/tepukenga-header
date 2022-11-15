@@ -1,16 +1,20 @@
 <% if $Links %>
     <button class="op-header__toggle-subnav">
-        <span>
-            $Title
-            <% if $Subtitle %>
-                <span>$Subtitle</span>
-            <% end_if %>
-        </span>
+        <% if $Title %>
+            <span>
+                $Title
+                <% if $Subtitle %>
+                    <span>$Subtitle</span>
+                <% end_if %>
+            </span>
+        <% end_if %>
+        $SVGHTML
     </button>
     <ul class="<% if $Content %> has-content<% end_if %>">
         <li class="$LinkingMode $CSSClass">
             <a{$IDAttr}{$ClassAttr} <% if $LinkURL %>href="{$LinkURL}"<% end_if %> {$TargetAttr}>
-                <strong>$Title</strong>
+                <% if $Title %><strong>$Title</strong><% end_if %>
+                $SVGHTML
             </a>
         </li>
         <% loop $Links %>
@@ -40,15 +44,18 @@
     </ul>
 <% else %>
     <a{$IDAttr}{$ClassAttr} <% if $LinkURL %>href="{$LinkURL}"<% end_if %> {$TargetAttr}>
-        <% if $Bold %>
-            <strong>$Title</strong>
-        <% else %>
-            <span>
-                $Title
-                <% if $Subtitle %>
-                    <span>$Subtitle</span>
-                <% end_if %>
-            </span>
+        <% if $Title %>
+            <% if $Bold %>
+                <strong>$Title</strong>
+            <% else %>
+                <span>
+                    $Title
+                    <% if $Subtitle %>
+                        <span>$Subtitle</span>
+                    <% end_if %>
+                </span>
+            <% end_if %>
         <% end_if %>
+        $SVGHTML
     </a>
 <% end_if %>
