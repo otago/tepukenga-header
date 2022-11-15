@@ -5,7 +5,7 @@ namespace OP\Header\Extensions;
 use OP\Header\Model\Header;
 use SilverStripe\ORM\DataExtension;
 
-class Page extends DataExtension
+class SiteConfig extends DataExtension
 {
     public function getHeader()
     {

@@ -25,7 +25,8 @@ class Link extends ModelsLink
         'Bold' => 'Boolean',
         'BottomMargin' => 'Varchar(255)',
         'Subtitle' => 'Varchar(255)',
-        'Content' => 'HTMLText'
+        'Content' => 'HTMLText',
+        'CSSClass' => 'Varchar(255)'
     ];
 
     private static $has_one = [
@@ -80,6 +81,7 @@ class Link extends ModelsLink
                 $fields->addFieldsToTab(
                     "Root.Settings",
                     [
+                        TextField::create('CSSClass'),
                         UploadField::create('Image'),
                         LinkField::create('LinkTo', 'Link', $this),
                         HTMLEditorField::create('Content'),
