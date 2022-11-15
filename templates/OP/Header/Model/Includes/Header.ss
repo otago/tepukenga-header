@@ -4,7 +4,7 @@
         <div class="op-header__top-links">
             <ul>
                 <% loop $TopLinks %>
-                    <li class="$LinkingMode"><% include OP\Header\Model\Item Header=$Top %></li>
+                    <li class="$LinkingMode $CSSClass"><% include OP\Header\Model\Item Header=$Top %></li>
                 <% end_loop %>
             </ul>
         </div>
@@ -17,7 +17,7 @@
                 <button id="toggleNavigation" class="op-header__toggle op-header__toggle-navigation"><% include OP\Header\Model\MenuSVG %></button>
                 <ul>
                     <% loop $Links %>
-                        <li class="$LinkingMode"><% include OP\Header\Model\Item Header=$Top %></li>
+                        <li class="$LinkingMode $CSSClass"><% include OP\Header\Model\Item Header=$Top %></li>
                     <% end_loop %>
                 </ul>
             </div>

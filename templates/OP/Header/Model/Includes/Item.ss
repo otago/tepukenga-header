@@ -8,16 +8,16 @@
         </span>
     </button>
     <ul class="<% if $Content %> has-content<% end_if %>">
-        <li class="$LinkingMode">
+        <li class="$LinkingMode $CSSClass">
             <a{$IDAttr}{$ClassAttr} <% if $LinkURL %>href="{$LinkURL}"<% end_if %> {$TargetAttr}>
                 <strong>$Title</strong>
             </a>
         </li>
         <% loop $Links %>
-            <li class="$LinkingMode" <% if $BottomMargin %>style="margin-bottom: $BottomMargin;"<% end_if %>><% include OP\Header\Model\Item Header=$Up.Header %></li>
+            <li class="$LinkingMode $CSSClass" <% if $BottomMargin %>style="margin-bottom: $BottomMargin;"<% end_if %>><% include OP\Header\Model\Item Header=$Up.Header %></li>
         <% end_loop %>
         <% if $Content %>
-            <li class="op-header__content">
+            <li class="op-header__content $CSSClass">
                 $Image
                 <span>$Content</span>
                 <span>$LinkTo</span>
@@ -26,7 +26,7 @@
                     <span class="op-header__social">
                         <ul>
                             <% loop $SocialMediaLinks %>
-                                <li>
+                                <li class="$CSSClass">
                                     <a{$IDAttr}{$ClassAttr} <% if $LinkURL %>href="{$LinkURL}"<% end_if %> {$TargetAttr}>
                                         $SVGHTML
                                     </a>
