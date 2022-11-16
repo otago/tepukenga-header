@@ -2,6 +2,6 @@ gorriecoe\Link\Models\Link:
   extensions:
     - OP\Header\Extensions\Link
 
-SilverStripe\SiteConfig\SiteConfig:
+Page:
   extensions:
-    - OP\Header\Extensions\SiteConfig
+    - OP\Header\Extensions\Page
