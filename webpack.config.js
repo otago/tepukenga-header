@@ -25,7 +25,7 @@ const config = [
   {
     name: 'js',
     entry: {
-      bundle: `${PATHS.SRC}/bundles/bundle.js`,
+      bundle: `${PATHS.SRC}/app.js`,
     },
     output: {
       path: PATHS.DIST,

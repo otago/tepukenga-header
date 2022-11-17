@@ -63,12 +63,12 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./client/src/bundles/bundle.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./client/src/app.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./client/src/boot/index.js":
+/***/ "./client/src/app.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -83,16 +83,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 window.document.addEventListener('DOMContentLoaded', function () {
   (0, _ToggleNavigation2.default)();
 });
-
-/***/ }),
-
-/***/ "./client/src/bundles/bundle.js":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-__webpack_require__("./client/src/boot/index.js");
 
 /***/ }),
 
