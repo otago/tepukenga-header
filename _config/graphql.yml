@@ -1,0 +1,10 @@
+---
+Name: tp-header-graphql
+Only:
+  classexists: 'SilverStripe\GraphQL\Schema\Schema'
+---
+SilverStripe\GraphQL\Schema\Schema:
+  schemas:
+    default:
+      src:
+        tepukenga-header: 'otago/tepukenga-header: _graphql'
